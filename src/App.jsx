@@ -12,19 +12,37 @@ export default function App() {
       desserts: [...prev.desserts, id],
     }));
   }
+  function handleDelet(id) {
+    setShoppingCart((prev) => ({
+      ...prev,
+      desserts: prev.desserts.filter((item) => item !== id),
+    }));
+  }
+  function handleMinus(id) {
+    const index = shoppingCart.desserts.indexOf(id);
+    setShoppingCart((prev) => ({
+      ...prev,
+      desserts: [
+        ...prev.desserts.slice(0, index),
+        ...prev.desserts.slice(index + 1),
+      ],
+    }));
+  }
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-[1fr_22rem] gap-12 items-start">
       <Shop>
         {products.map((product) => (
           <Product
+            onMinus={handleMinus}
             key={product.id}
             {...product}
+            deserts={shoppingCart.desserts}
             onSelect={() => handleAddDessert(product.id)}
           />
         ))}
       </Shop>
-      <Cart deserts={shoppingCart.desserts} />
+      <Cart onDelete={handleDelet} deserts={shoppingCart.desserts} />
     </main>
   );
 }

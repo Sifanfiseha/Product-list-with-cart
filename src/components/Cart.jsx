@@ -3,14 +3,12 @@ import products from "../data/products";
 import removeIcon from "../assets/images/icon-remove-item.svg";
 import icon from "../assets/images/icon-carbon-neutral.svg";
 
-export default function Cart({ deserts = [] }) {
-  // Group by ID to get quantity
+export default function Cart({ onDelete, deserts = [] }) {
   const grouped = deserts.reduce((acc, id) => {
     acc[id] = (acc[id] || 0) + 1;
     return acc;
   }, {});
 
-  // Build items with full info
   const items = Object.entries(grouped).map(([id, quantity]) => {
     const product = products.find((p) => p.id === id);
     return {
@@ -61,8 +59,13 @@ export default function Cart({ deserts = [] }) {
                     </div>
                   </div>
                 </div>
-                <div className="border border-Ros-400 rounded-3xl p-1 cursor-pointer">
-                  <img src={removeIcon} alt="Remove item" />
+                <div className="">
+                  <button
+                    className="border border-Ros-400 p-1 cursor-pointer rounded-4xl"
+                    onClick={() => onDelete(product.id)}
+                  >
+                    <img src={removeIcon} alt="Remove item" />
+                  </button>
                 </div>
               </li>
             ))}
@@ -77,7 +80,7 @@ export default function Cart({ deserts = [] }) {
               This is a <strong>carbon-neutral</strong> delivery
             </p>
           </div>
-          <button className="bg-orange-700 w-full mt-4 py-2 rounded-4xl font-bold text-white">
+          <button className="bg-orange-700 hover:bg-orange-800 duration-110 ease-in cursor-pointer w-full mt-4 py-4 rounded-4xl font-bold text-white">
             confirm order
           </button>
         </div>

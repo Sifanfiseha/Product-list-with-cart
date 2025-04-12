@@ -12,10 +12,12 @@
 }
 
 @theme {
-  --breakpoint-md: 56.25rem;
+  --breakpoint-md: 65.5rem;
   --breakpoint-xs: 30rem;
   --breakpoint-2xl: 100rem;
   --breakpoint-3xl: 120rem;
+  --breakpoint-cm: 70rem;
+  --breakpoint-lg: 80rem;
 }
 :root {
   --Red: hsl(14, 86%, 42%);

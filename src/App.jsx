@@ -28,6 +28,9 @@ export default function App() {
       ],
     }));
   }
+  function handleReset() {
+    setShoppingCart({ desserts: [] });
+  }
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-[1fr_22rem] gap-12 items-start">
@@ -42,7 +45,11 @@ export default function App() {
           />
         ))}
       </Shop>
-      <Cart onDelete={handleDelet} deserts={shoppingCart.desserts} />
+      <Cart
+        onReset={handleReset}
+        onDelete={handleDelet}
+        deserts={shoppingCart.desserts}
+      />
     </main>
   );
 }

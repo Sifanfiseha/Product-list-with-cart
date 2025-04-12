@@ -26,7 +26,7 @@ export default function Button({ onMinus, children, onclick, isSelected }) {
             {children}
             <button
               onClick={onclick}
-              className="border-1 cursor-pointer border-white rounded-4xl p-1 w-4 h-4 active:bg-Ros-50"
+              className="border-1 cursor-pointer   border-white rounded-4xl p-1 w-4 h-4 active:bg-Ros-50"
             >
               <img className="stroke-Ros-900" src={plus} alt="plus" />
             </button>

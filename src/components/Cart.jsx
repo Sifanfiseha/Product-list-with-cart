@@ -2,8 +2,16 @@ import empty from "../assets/images/illustration-empty-cart.svg";
 import products from "../data/products";
 import removeIcon from "../assets/images/icon-remove-item.svg";
 import icon from "../assets/images/icon-carbon-neutral.svg";
+import CheckoutModal from "./CheckoutModal";
+import { useRef } from "react";
 
-export default function Cart({ onDelete, deserts = [] }) {
+export default function Cart({ onReset, onDelete, deserts = [] }) {
+  const modal = useRef();
+
+  function handleOpenModal() {
+    modal.current.open();
+  }
+
   const grouped = deserts.reduce((acc, id) => {
     acc[id] = (acc[id] || 0) + 1;
     return acc;
@@ -80,9 +88,17 @@ export default function Cart({ onDelete, deserts = [] }) {
               This is a <strong>carbon-neutral</strong> delivery
             </p>
           </div>
-          <button className="bg-orange-700 hover:bg-orange-800 duration-110 ease-in cursor-pointer w-full mt-4 py-4 rounded-4xl font-bold text-white">
+          <button
+            onClick={handleOpenModal}
+            className="bg-orange-700 hover:bg-orange-800 duration-110 ease-in cursor-pointer w-full mt-4 py-4 rounded-4xl font-bold text-white"
+          >
             confirm order
           </button>
+          <CheckoutModal
+            onReset={onReset}
+            products={items}
+            ref={modal}
+          ></CheckoutModal>
         </div>
       )}
     </div>
